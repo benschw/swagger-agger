@@ -4,6 +4,9 @@
  */
 goog.provide('demo');
 
-goog.require('demo.app.module');
+goog.require('demo.widget.module');
 
+angular.element(document).ready(function() {
+	angular.bootstrap(document, ['demo.widget']);
+});
 

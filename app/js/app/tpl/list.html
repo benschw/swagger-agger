@@ -1,0 +1,16 @@
+<div ng-controller="demo.widget.WidgetListCtrl">
+	<div class="list-group">
+		<a href="#" 
+				ng-repeat="item in widget.items"
+				class="list-group-item"
+				ng-class="{active: item == widget.selected }"
+				ng-click="onSelect(item)"
+			>
+			{{item}}
+		</a>
+
+	</div>
+	<h3>{{widget.msg}}</h3>
+</div>
+
+

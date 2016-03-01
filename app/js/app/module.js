@@ -2,27 +2,35 @@
 /**
  * @fileoverview Master bootstrap file.
  */
-goog.provide('demo.app.module');
+goog.provide('demo.widget.module');
 
 goog.require('cache.tpl');
-goog.require('demo.app.Config');
-goog.require('demo.app.HomeCtrl');
-goog.require('demo.app.MessagesCtrl');
+goog.require('demo.widget.WidgetCtrl');
+goog.require('demo.widget.WidgetListCtrl');
+goog.require('demo.widget.WidgetService');
+goog.require('demo.widget.WidgetDirective');
+goog.require('demo.widget.WidgetListDirective');
 
 
 
 /** 
  * @type {angular.Module} 
  */
-demo.app.module = angular.module('demo.app', [
-		'ngRoute',
-		'ui.router',
+demo.widget.module = angular.module('demo.widget', [
 		'ui.bootstrap',
 		cache.tpl.name
 	])
-	.config(demo.app.Config)
-	.controller('demo.app.HomeCtrl', demo.app.HomeCtrl)
-	.controller('demo.app.MessagesCtrl', demo.app.MessagesCtrl);
+	.controller('demo.widget.WidgetCtrl', demo.widget.WidgetCtrl)
+	.controller('demo.widget.WidgetListCtrl', demo.widget.WidgetListCtrl)
+	.directive('widget', function() {
+		return new demo.widget.WidgetDirective();
+	})
+	.directive('widgetList', function() {
+		return new demo.widget.WidgetListDirective();
+	})
+	.factory('widgetService', function() {
+		return new demo.widget.WidgetService();
+	});
 
 
 
