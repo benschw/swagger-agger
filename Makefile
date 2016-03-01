@@ -29,6 +29,9 @@ go-build:
 	go-bindata -o assets.go dist/
 	go build
 
+
+deps: js-deps go-deps
+
 clean: js-clean go-clean
 
 build: js-build go-build
