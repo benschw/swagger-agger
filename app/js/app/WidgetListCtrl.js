@@ -5,14 +5,14 @@ goog.provide('demo.widget.WidgetListCtrl');
 
 /**
  * Home controller
- * @param  {angular.Scope=} $scope
+ * @param {angular.Scope} $scope
  * @param {demo.widget.WidgetService} widgetService
  * @constructor
  * @ngInject
  */
 demo.widget.WidgetListCtrl = function($scope, widgetService) {
 	/**
-	 * @type {string}
+	 * @type {demo.widget.WidgetService}
 	 * @export
 	 */
 	$scope.widget = widgetService;

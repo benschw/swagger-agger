@@ -4,11 +4,11 @@ goog.provide('demo.widget.WidgetService');
 
 
 /**
- * @param {string} msg
+ * @param {angular.$http} $http
  * @constructor
  * @ngInject
  */
-demo.widget.WidgetService = function() {
+demo.widget.WidgetService = function($http) {
 	/**
 	 * @export
 	 * @type {string}
@@ -19,11 +19,17 @@ demo.widget.WidgetService = function() {
 	 * @export
 	 * @type {Array<string>}
 	 */
-	this.items = [
-		"hello world",
-		"hello solar system",
-		"hello galaxy",
-		"hello universe"
-	];
+	this.items = [];
+
+
+	var url = "http://localhost:8000/api/widget?callback=JSON_CALLBACK";
+
+	var that = this;
+
+	$http.jsonp(url)
+		.success(function(data){
+			that.items = data;
+			console.log(data);
+		});
 
 };

@@ -28,9 +28,9 @@ demo.widget.module = angular.module('demo.widget', [
 	.directive('widgetList', function() {
 		return new demo.widget.WidgetListDirective();
 	})
-	.factory('widgetService', function() {
-		return new demo.widget.WidgetService();
-	});
+	.factory('widgetService', ['$http', function($http) {
+		return new demo.widget.WidgetService($http);
+	}]);
 
 
 
