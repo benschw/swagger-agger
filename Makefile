@@ -37,4 +37,4 @@ clean: js-clean go-clean
 build: js-build go-build
 
 
-
+ci: clean deps build
