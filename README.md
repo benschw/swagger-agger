@@ -4,6 +4,8 @@
 [download latest](https://drone.io/github.com/benschw/ui-widget/files)
 
 
+download and run the app and test it out here: http://benschw.github.io/ui-widget/example/
+
 
 ## Build the JS
 ### get normal deps
