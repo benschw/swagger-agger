@@ -6,6 +6,7 @@ import (
 	"net/http"
 
 	"github.com/gorilla/mux"
+	"github.com/rs/cors"
 )
 
 func GetJavascript(res http.ResponseWriter, req *http.Request) {
@@ -59,9 +60,23 @@ func (w *WidgetResource) findAllWidgets(res http.ResponseWriter, req *http.Reque
 
 	res.Header().Set("Content-Type", "application/json")
 	res.WriteHeader(http.StatusOK)
-	fmt.Fprintf(res, "%s(%s)", callback, body)
+
+	if callback != "" {
+		fmt.Fprintf(res, "%s(%s)", callback, body)
+	} else {
+		fmt.Fprintf(res, "%s", body)
+	}
 }
 func (w *WidgetResource) deleteWidget(res http.ResponseWriter, req *http.Request) {
+}
+func corsHandler(h http.Handler) http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		if r.Method == "OPTIONS" {
+			//handle preflight in here
+		} else {
+			h.ServeHTTP(w, r)
+		}
+	}
 }
 
 func main() {
@@ -80,7 +95,9 @@ func main() {
 
 	r.HandleFunc("/assets/app.js", GetJavascript).Methods("GET")
 
-	http.Handle("/", r)
+	serveMux := http.NewServeMux()
+	serveMux.Handle("/", r)
+	handler := cors.Default().Handler(serveMux)
 
-	http.ListenAndServe(":8000", nil)
+	http.ListenAndServe(":8000", handler)
 }

@@ -17,5 +17,19 @@ demo.widget.WidgetCtrl = function($scope, widgetService) {
 	 */
 	$scope.widget = widgetService;
 	
+
+	/**
+	 * @type {string}
+	 * @export
+	 */
+	$scope.newWidget = '';
+
+	/**
+	 * @type {function()}
+	 * @export
+	 */
+	$scope.addWidget = function() {
+		widgetService.addWidget($scope.newWidget);
+	};
 };
 

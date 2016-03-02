@@ -1,4 +1,11 @@
 <div ng-controller="demo.widget.WidgetCtrl">
 	<h2>{{widget.selected.message}}</h2>
+	<form>
+		<div class="form-group">
+			<label for="exampleInputEmail1">New Widget</label>
+			<input type="text" class="form-control" id="exampleInputEmail1" placeholder="Widget Message" ng-model="newWidget">
+		</div>
+		<button type="submit" class="btn btn-default" ng-click="addWidget()">Add</button>
+	</form>
 </div>
 

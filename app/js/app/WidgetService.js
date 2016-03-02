@@ -21,6 +21,7 @@ demo.widget.WidgetService = function($http) {
 	 */
 	this.items = [];
 
+	this.host = 'http://localhost:8000';
 	this.http = $http;
 
 	
@@ -28,26 +29,34 @@ demo.widget.WidgetService = function($http) {
 };
 
 /**
+ * @type {string}
+ * @private
+ */
+demo.widget.WidgetService.prototype.host = '';
+/**
  * @type {angular.$http}
  * @private
  */
 demo.widget.WidgetService.prototype.http = null;
 
 demo.widget.WidgetService.prototype.refreshAll = function() {
-	var url = "http://localhost:8000/api/widget?callback=JSON_CALLBACK";
+	var url = this.host + '/api/widget';
 	var that = this;
-	this.http.jsonp(url)//.success(this.refreshAllSuccess);
+	//this.http.jsonp(url+'?callback=JSON_CALLBACK')
+	this.http.get(url)
 		.success(function(data){
-			that.refreshAllSuccess(data);
+			that.items = data;
 		});
-
 };
-/**
- * @export
- * @param {Array<*>} data
- */
-demo.widget.WidgetService.prototype.refreshAllSuccess = function(data) {
-	this.items = data;
 
-	console.log(this);
+/**
+ * @param {string} message
+ */
+demo.widget.WidgetService.prototype.addWidget = function(message) {
+	var url = this.host + '/api/widget';
+	var that = this;
+	this.http.post(url, {'message': message})
+		.success(function(){
+			that.refreshAll();
+		});
 };
