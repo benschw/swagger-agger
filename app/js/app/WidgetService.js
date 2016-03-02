@@ -17,26 +17,37 @@ demo.widget.WidgetService = function($http) {
 
 	/**
 	 * @export
-	 * @type {Array<string>}
+	 * @type {Array<*>}
 	 */
 	this.items = [];
 
+	this.http = $http;
 
+	
+	this.refreshAll();
+};
+
+/**
+ * @type {angular.$http}
+ * @private
+ */
+demo.widget.WidgetService.prototype.http = null;
+
+demo.widget.WidgetService.prototype.refreshAll = function() {
 	var url = "http://localhost:8000/api/widget?callback=JSON_CALLBACK";
-
 	var that = this;
-
-	$http.jsonp(url)//.success(this.refreshAllSuccess);
+	this.http.jsonp(url)//.success(this.refreshAllSuccess);
 		.success(function(data){
-			that.items = data;
-			console.log(data);
+			that.refreshAllSuccess(data);
 		});
 
 };
-
-demo.widget.prototype.refreshAll = function() {
-
-};
-demo.widget.prototype.refreshAllSuccess = function(data) {
+/**
+ * @export
+ * @param {Array<*>} data
+ */
+demo.widget.WidgetService.prototype.refreshAllSuccess = function(data) {
 	this.items = data;
+
+	console.log(this);
 };
