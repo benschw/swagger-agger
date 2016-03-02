@@ -1,4 +1,8 @@
-POC fort closure and angularjs
+[![Build Status](https://drone.io/github.com/benschw/ui-widget/status.png)](https://drone.io/github.com/benschw/ui-widget/latest)
+
+
+[download latest](https://drone.io/github.com/benschw/ui-widget/files)
+
 
 
 ## Build the JS
