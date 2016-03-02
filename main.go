@@ -26,6 +26,25 @@ type WidgetResource struct {
 }
 
 func (w *WidgetResource) addWidget(res http.ResponseWriter, req *http.Request) {
+	widget := &Widget{}
+
+	decoder := json.NewDecoder(req.Body)
+	if err := decoder.Decode(widget); err != nil {
+		panic(err)
+	}
+	b, err := json.Marshal(widget)
+	if err != nil {
+		panic(err)
+	}
+	body := string(b[:])
+
+	widget.Id = len(w.widgets) + 1
+	w.widgets = append(w.widgets, widget)
+
+	res.Header().Set("Content-Type", "application/json")
+	res.WriteHeader(http.StatusCreated)
+	fmt.Fprint(res, body)
+
 }
 func (w *WidgetResource) findAllWidgets(res http.ResponseWriter, req *http.Request) {
 	callback := req.FormValue("callback")
