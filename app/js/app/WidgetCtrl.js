@@ -11,6 +11,11 @@ goog.provide('demo.widget.WidgetCtrl');
  * @ngInject
  */
 demo.widget.WidgetCtrl = function($scope, widgetService) {
+	$scope.$watch($scope.host, function() {
+		widgetService.setHost($scope.host);
+		widgetService.refreshAll();
+	});
+
 	/**
 	 * @type {demo.widget.WidgetService}
 	 * @export

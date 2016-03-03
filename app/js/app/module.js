@@ -7,9 +7,9 @@ goog.provide('demo.widget.module');
 goog.require('cache.tpl');
 goog.require('demo.widget.WidgetCtrl');
 goog.require('demo.widget.WidgetListCtrl');
-goog.require('demo.widget.WidgetService');
-goog.require('demo.widget.WidgetDirective');
-goog.require('demo.widget.WidgetListDirective');
+goog.require('demo.widget.WidgetServiceFactory');
+goog.require('demo.widget.WidgetDirectiveFactory');
+goog.require('demo.widget.WidgetListDirectiveFactory');
 
 
 
@@ -22,15 +22,6 @@ demo.widget.module = angular.module('demo.widget', [
 	])
 	.controller('demo.widget.WidgetCtrl', demo.widget.WidgetCtrl)
 	.controller('demo.widget.WidgetListCtrl', demo.widget.WidgetListCtrl)
-	.directive('widget', function() {
-		return new demo.widget.WidgetDirective();
-	})
-	.directive('widgetList', function() {
-		return new demo.widget.WidgetListDirective();
-	})
-	.factory('widgetService', ['$http', function($http) {
-		return new demo.widget.WidgetService($http);
-	}]);
-
-
-
+	.directive('widget', demo.widget.WidgetDirectiveFactory)
+	.directive('widgetList', demo.widget.WidgetListDirectiveFactory)
+	.factory('widgetService', demo.widget.WidgetServiceFactory);
